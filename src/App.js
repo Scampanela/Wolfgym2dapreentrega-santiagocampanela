@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer";
+import {ItemListContainer} from "./components/ItemListContainer/HomeView/ItemListContainer";
 import {ItemDetailContainer} from "./components/ItemDetailContainer/ItemDetailContainer"
-import { CartScreen } from './components/CartScreen/CartScreen';
-import { NavBar } from "./components/NavBar/NavBar";
+import {CartScreen} from './components/CartScreen/CartScreen';
+import {NavBar} from "./components/NavBar/NavBar";
 import {ItemCount} from './components/ItemCount/ItemCount';
 import {Pika} from './components/Pika/Pika';
 import {
@@ -37,6 +37,9 @@ function App() {
     const newCart = carrito.filter((prod) => prod.id !== itemId)
     setCarrito(newCart)
 
+  } 
+  const vaciaCarrito = () =>{
+    setCarrito({})
   }
 
 
@@ -44,7 +47,8 @@ function App() {
     <CartContext.Provider value={{
       addToCart,
       calcularCantidad,
-      precioTotal
+      precioTotal,
+      vaciaCarrito
       }}>
       <div className='App'>
         <Router>

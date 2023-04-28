@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {ImSpinner3} from 'react-icons/im'
-import { pedirProductos } from '../../helpers/pedirProductos';
-import { ItemList } from '../ItemList/ItemList';
-import './itenlistcontainer.css';
+import { pedirProductos } from '../../../helpers/pedirProductos';
+import { ItemList } from '../../../ItemList/ItemList';
+import './itemlistcontainer.css';
 import { useParams } from 'react-router-dom';
 
 export const ItemListContainer = ({greating}) => {
