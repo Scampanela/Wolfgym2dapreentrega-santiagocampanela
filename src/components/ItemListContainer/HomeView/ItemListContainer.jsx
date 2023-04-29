@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {ImSpinner3} from 'react-icons/im'
-import { pedirProductos } from '../../../helpers/pedirProductos';
+// import { pedirProductos } from '../../../helpers/pedirProductos';
+
+// Importamos función getFirestore para consumir nuestra base de datos
+import {getFirestore} from '../../../firebase/config'
 import { ItemList } from '../../../ItemList/ItemList';
 import './itemlistcontainer.css';
 import { useParams } from 'react-router-dom';
@@ -11,25 +14,44 @@ export const ItemListContainer = ({greating}) => {
 
   const [loading, setLoading] = useState(false)
 
+// iniciamos el efecto montaje, con un loading en "true"
+  //  setLoading(true)
+ //   pedirProductos()
+  //    .then((res) =>{
+  //      // Imprimos la respuesta y la guardamos en el hook
+  //      if(categoryId){
+  //        setItems(res.filter(prod => prod.category === categoryId)  )
+  //      }else{
+  //        setItems(res)
+  //      }
+  //      // console.log(res)
+  //    })
+  //    // Consologueamos errores
+ //     .catch((error) => console.log(error))
+  //    .finally(() =>{setLoading(false)})
   const {categoryId} = useParams()
 
 
   useEffect(() =>{
-// iniciamos el efecto montaje, con un loading en "true"
     setLoading(true)
-    pedirProductos()
-      .then((res) =>{
-        // Imprimos la respuesta y la guardamos en el hook
-        if(categoryId){
-          setItems(res.filter(prod => prod.category === categoryId)  )
-        }else{
-          setItems(res)
-        }
-        // console.log(res)
-      })
-      // Consologueamos errores
-      .catch((error) => console.log(error))
-      .finally(() =>{setLoading(false)})
+
+   const db =getFirestore();
+
+   const productos = db.collection('productos')
+
+   productos.get()
+        .then((res)=>{
+          const newItem = res.docs.map((doc) =>{
+            return {id: doc.id, ...doc.data()}
+          })
+          console.table(newItem)
+          setItems(newItem)
+        })
+        .catch((error) => console.log(error))
+        .finally(() =>{
+          setLoading(false)
+        })
+
   }, [categoryId])
 
 
