@@ -58,6 +58,7 @@ function App() {
             <Route path='/productos/:categoryId' element={<ItemListContainer/>}/>
             <Route path='/detail/:itemId' element={<ItemDetailContainer/>}/>
             <Route path='/counter' element={<ItemCount/>}/>
+            <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/cart' element={<CartScreen/>}/>
             <Route path='/pika' element={<Pika/>}/>
             <Route path='*' element={<Navigate to='/'/>} />

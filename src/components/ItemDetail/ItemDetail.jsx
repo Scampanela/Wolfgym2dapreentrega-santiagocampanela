@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
 import { ItemCount } from '../ItemCount/ItemCount'
 import {CartContext} from '../context/CartContext'
+import { Link } from 'react-router-dom';
 
 export const ItemDetail = ({ id, description, price, image, category, stock }) => {
   // Pasamos mediante props, cada propiedad de nuestro productos(objetos) y lo colocamos por props en nuestro return
@@ -58,6 +59,10 @@ export const ItemDetail = ({ id, description, price, image, category, stock }) =
           
         </Card.Body>
         <Button onClick={volverHaciaAtras} className='btn btn-sucess'>Volver atras</Button>
+        <Link to='/cart' className='btn btn-info'>
+          Ir al carrito
+        </Link>
+
       </Card>
     </div>
   )
